@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: content-box;
     font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    
 }
 
 .header {
@@ -33,7 +35,7 @@
 
 .res-container, .shimmer-container {
     background-color: rgba(248, 243, 248, 0.673);
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .card, .shimmer-container{
@@ -99,4 +101,49 @@
     height: 30px;
     border-radius: 30px;
     padding: 5px 10px;
+}
+
+
+.restaurant-menu {
+    padding: 10px 45px;
+    border: 1px solid ghostwhite;
+}
+
+.restaurant-menu-heading {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid lightcyan;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.restaurant-menu-heading-name {
+    border: none;
+}
+
+.restaurant-menu-heading-extra {
+    border: 1px solid lightpink;
+    padding: 5px;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.restaurant-menu-body {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    
+}
+
+.restaurant-menu-body > ul > li {
+    list-style-type: none;
+    width: 400px;
+    border: 0.3px solid lightpink;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
 }
