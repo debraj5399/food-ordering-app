@@ -11,7 +11,8 @@ const RestaurantMenu = () => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
-    dispatch(addItem(item));
+    const { id, name, price } = item.card.info; // Extract necessary data
+    dispatch(addItem({ id, name, price })); // Pass only serializable data
   };
 
   if (resInfo === null) return <Shimmer />;
@@ -49,11 +50,8 @@ const RestaurantMenu = () => {
       <div className="restaurant-menu-body">
         <ul>
           {itemCards.map((item) => (
-            <>
-              <div
-                className="border border-gray m-3 p-2 flex justify-between rounded-lg cursor-pointer"
-                key={item.card.info.id}
-              >
+            <div key={item.card.info.id}>
+              <div className="border border-gray m-3 p-2 flex justify-between rounded-lg cursor-pointer">
                 <div className="text-sm mt-5">
                   <h2>
                     {item.card.info.name} - Rs.{item.card.info.price / 100}
@@ -61,14 +59,14 @@ const RestaurantMenu = () => {
                 </div>
                 <button
                   className="border border-black m-2 p-2 bg-black text-white rounded-lg"
-                  onClick={(item) => {
+                  onClick={() => {
                     handleAddItem(item);
                   }}
                 >
                   Add +
                 </button>
               </div>
-            </>
+            </div>
           ))}
         </ul>
       </div>

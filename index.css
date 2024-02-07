@@ -135,14 +135,14 @@
     border: none;
 }
 
-.restaurant-menu-heading-extra {
+/* .restaurant-menu-heading-extra {
     border: 1px solid lightpink;
     padding: 5px;
     border-radius: 10px;
     height: 50px;
     display: flex;
     align-items: center;
-}
+} */
 
 .restaurant-menu-body {
     justify-content: center;

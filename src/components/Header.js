@@ -26,7 +26,9 @@ const Header = () => {
           <li>
             <Link to={"/contact"}>Contact</Link>
           </li>
-          <li>Cart - {cartItems.length}</li>
+          <li className="font-bold">
+            <Link to={"/cart"}>Cart - ({cartItems.length} items)</Link>
+          </li>
           <li className="font-bold">{loggedInUser}</li>
         </ul>
       </div>
