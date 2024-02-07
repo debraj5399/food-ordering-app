@@ -1,6 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 * {
     margin: 0;
@@ -151,7 +148,7 @@
     
 }
 
-/* .restaurant-menu-body > ul > li {
+.restaurant-menu-body > ul > li {
     list-style-type: none;
     width: 400px;
     border: 0.3px solid lightpink;
@@ -159,7 +156,7 @@
     border-radius: 10px;
     margin: 10px;
     cursor: pointer;
-} */
+}
 
 .user-img {
     width: 150px;

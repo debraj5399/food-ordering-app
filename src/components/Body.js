@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SWIGGY_API } from "../utils/constants";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
@@ -9,11 +10,14 @@ const Body = () => {
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [topRated, setTopRated] = useState(false);
-
+  const onlineStatus = useOnlineStatus();
   useEffect(() => {
     fetchData();
   }, []);
 
+  if (!onlineStatus) {
+    return <h1>User is offline</h1>;
+  }
   const topRatedSelection = () => {
     setTopRated(!topRated);
     let filteredRestaurant = restaurantList;

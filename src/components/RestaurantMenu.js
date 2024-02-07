@@ -1,21 +1,19 @@
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { SWIGGY_API_RESTAURANT } from "../utils/constants";
+import { addItem } from "../utils/cartSlice";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
   const { resId } = useParams();
+  const resInfo = useRestaurantMenu(resId);
 
-  const fetchRestaurantMenu = async () => {
-    const response = await fetch(SWIGGY_API_RESTAURANT + resId);
-    const data = await response.json();
-    setResInfo(data.data);
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
   };
 
-  useEffect(() => {
-    fetchRestaurantMenu();
-  }, []);
   if (resInfo === null) return <Shimmer />;
 
   const {
@@ -28,8 +26,6 @@ const RestaurantMenu = () => {
 
   const { itemCards } =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-
-  // console.log(itemCards);
 
   return (
     <div className="restaurant-menu">
@@ -53,9 +49,26 @@ const RestaurantMenu = () => {
       <div className="restaurant-menu-body">
         <ul>
           {itemCards.map((item) => (
-            <li key={item.card.info.id}>
-              {item.card.info.name} - Rs.{item.card.info.price / 100}
-            </li>
+            <>
+              <div
+                className="border border-gray m-3 p-2 flex justify-between rounded-lg cursor-pointer"
+                key={item.card.info.id}
+              >
+                <div className="text-sm mt-5">
+                  <h2>
+                    {item.card.info.name} - Rs.{item.card.info.price / 100}
+                  </h2>
+                </div>
+                <button
+                  className="border border-black m-2 p-2 bg-black text-white rounded-lg"
+                  onClick={(item) => {
+                    handleAddItem(item);
+                  }}
+                >
+                  Add +
+                </button>
+              </div>
+            </>
           ))}
         </ul>
       </div>

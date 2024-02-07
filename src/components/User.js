@@ -1,5 +1,6 @@
 import React from "react";
 import { USER_API } from "../utils/constants";
+import Shimmer from "./Shimmer";
 class User extends React.Component {
   constructor(props) {
     super(props);
@@ -14,21 +15,25 @@ class User extends React.Component {
   async componentDidMount() {
     const response = await fetch(USER_API);
     const data = await response.json();
-    console.log(data);
     this.setState({
       resInfo: data,
     });
   }
 
   render() {
+    if (this.state.resInfo.name === "") return <Shimmer />;
     const { name, location, company, avatar_url } = this.state.resInfo;
     const { count } = this.state;
     return (
-      <div>
-        <img className="user-img" src={avatar_url}></img>
-        <h3>Name: {name}</h3>
-        <h3>Location: {location}</h3>
-        <h3>Company: {company}</h3>
+      <div className="about-user-main">
+        <div className="about-user">
+          <img className="user-img" src={avatar_url}></img>
+          <div className="user-info">
+            <p>Name: {name}</p>
+            <p>Location: {location}</p>
+            <p>Company: {company}</p>
+          </div>
+        </div>
       </div>
     );
   }
