@@ -12,3 +12,5 @@ export const SWIGGY_API_UPDATE =
 
 export const SWIGGY_API_RESTAURANT =
   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.8845097&lng=77.6035522&restaurantId=";
+
+export const USER_API = "https://api.github.com/users/debraj5399";

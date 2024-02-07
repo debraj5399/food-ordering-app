@@ -8,11 +8,23 @@ const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [topRated, setTopRated] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  const topRatedSelection = () => {
+    setTopRated(!topRated);
+    let filteredRestaurant = restaurantList;
+    if (!topRated) {
+      filteredRestaurant = restaurantList.filter(
+        (res) => res.info.avgRating > 4
+      );
+    }
+
+    setFilteredRestaurant(filteredRestaurant);
+  };
   const fetchData = async () => {
     const response = await fetch(SWIGGY_API);
     const data = await response.json();
@@ -41,18 +53,14 @@ const Body = () => {
                   .toLowerCase()
                   .includes(e.target.value.toLowerCase())
               );
-              console.log(filteredRestaurant);
               setFilteredRestaurant(filteredRestaurant);
             }}
           ></input>
         </div>
         <button
-          className="top-rated-btn"
+          className={!topRated ? "top-rated-btn" : "top-rated-btn-selected"}
           onClick={() => {
-            let filteredList = restaurantList.filter(
-              (res) => res.info.avgRating > 4
-            );
-            setFilteredRestaurant(filteredList);
+            topRatedSelection();
           }}
         >
           Top Rated Restaurant 🔥
@@ -60,10 +68,10 @@ const Body = () => {
         <button
           className="fast-delivery-btn"
           onClick={() => {
-            let filteredList = restaurantList.filter(
+            let filteredRestaurant = restaurantList.filter(
               (res) => res.info.sla.deliveryTime < 20
             );
-            setFilteredRestaurant(filteredList);
+            setFilteredRestaurant(filteredRestaurant);
           }}
         >
           Fast Delivery 🏍️
